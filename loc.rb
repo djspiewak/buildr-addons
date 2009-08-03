@@ -3,13 +3,13 @@ module LinesOfCode
 
   first_time do
     # Define task not specific to any project.
-    #Project.local_task('loc')
+    Project.local_task('loc')
   end
 
   before_define do |project|
     # Define the loc task for this particular project.
     desc 'Count lines of code in current project'
-    Rake::Task.define_task 'loc' do |task|
+    task 'loc' do |task|
       lines = task.prerequisites.map { |path| Dir["#{path}/**/*"] }.flatten.uniq.
         inject(0) { |total, file| total + (File.directory?(file) ? 0 : File.readlines(file).size) }
       puts "Project #{project.name} has #{lines} lines of code"
