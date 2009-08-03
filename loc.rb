@@ -12,7 +12,7 @@ module LinesOfCode
     task 'loc' do |task|
       lines = task.prerequisites.map { |path| Dir["#{path}/**/*"] }.flatten.uniq.
         inject(0) { |total, file| total + (File.directory?(file) ? 0 : File.readlines(file).size) }
-      puts "Project #{project.name} has #{lines} lines of code"
+      info "Project #{project.name} has #{lines} lines of code"
     end
   end
 
